@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(kuri_web_teleop)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(OpenCV_DIR /usr/share/OpenCV/)
+#set(OpenCV_DIR /usr/share/OpenCV/)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)

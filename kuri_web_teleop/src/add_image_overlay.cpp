@@ -2,7 +2,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include "sensor_msgs/CompressedImage.h"
-#include "mobile_base_driver/Power.h"
+//#include "mobile_base_driver/Power.h"
 #include "sensor_msgs/LaserScan.h"
 #include "sensor_msgs/JointState.h"
 #include <mutex>
@@ -77,7 +77,7 @@ private:
 
   // Subscriber callbacks
   void imageCallback(boost::shared_ptr<sensor_msgs::CompressedImage> msg);
-  void powerCallback(boost::shared_ptr<mobile_base_driver::Power> msg);
+  //void powerCallback(boost::shared_ptr<mobile_base_driver::Power> msg);
   void scanCallback(boost::shared_ptr<sensor_msgs::LaserScan> msg);
   void jointsCallback(boost::shared_ptr<sensor_msgs::JointState> msg);
 
@@ -101,7 +101,7 @@ AddImageOverlay::AddImageOverlay() : transport(nh) {
 
   // Create the subscribers
   image_sub = nh.subscribe("/upward_looking_camera/compressed", 1, &AddImageOverlay::imageCallback, this);
-  power_sub = nh.subscribe("/mobile_base/power", 1, &AddImageOverlay::powerCallback, this);
+  //power_sub = nh.subscribe("/mobile_base/power", 1, &AddImageOverlay::powerCallback, this);
   scan_sub = nh.subscribe("/scan", 1, &AddImageOverlay::scanCallback, this);
   joint_sub = nh.subscribe("/joint_states", 1, &AddImageOverlay::jointsCallback, this);
 
@@ -423,12 +423,12 @@ void AddImageOverlay::imageCallback(boost::shared_ptr<sensor_msgs::CompressedIma
   image_lock.unlock();
 }
 
-void AddImageOverlay::powerCallback(boost::shared_ptr<mobile_base_driver::Power> msg) {
-  std::unique_lock<std::mutex> battery_lock(battery_mutex);
-  battery_percent = msg->battery.rounded_pct;
-  is_charging = msg->dock_present;
-  battery_lock.unlock();
-}
+//void AddImageOverlay::powerCallback(boost::shared_ptr<mobile_base_driver::Power> msg) {
+//  std::unique_lock<std::mutex> battery_lock(battery_mutex);
+//  battery_percent = msg->battery.rounded_pct;
+//  is_charging = msg->dock_present;
+//  battery_lock.unlock();
+//}
 
 void AddImageOverlay::scanCallback(boost::shared_ptr<sensor_msgs::LaserScan> msg) {
   double min_distance_local = 10.0; // max is 6.75
